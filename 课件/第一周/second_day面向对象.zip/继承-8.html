@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+function Person(name){
+	this.weight=7;
+	this.height=40;
+	this.skin="yellow";
+	this.gender="";
+	this.name=name;
+	this.age=0;
+}
+Person.prototype.eat=function(){console.log("天生就会吃");}
+Person.prototype.cry=function(){console.log("天生就会哭");}
+function FE(){
+	
+}
+
+	FE.prototype=new Person;
+FE.prototype.writeCss=function(){
+	console.log("我已经掌握了写CSS的技术");
+	};
+FE.prototype.writeJS=function(){
+	console.log("我已经掌握了写JavaScript技术");
+	}
+
+var tom=new FE;
+tom.writeCss();
+var rose=new FE;
+var jack=new FE;
+jack.eat();
+
+//JS中，prototype的作用是什么？
+//答：每一个函数上都有一个prototype属性，当这个函数做为一个类在用的时候，它保存这个类上的共享方法，这些方法解决每个实例相同方法的复用的问题。
+
+//在JS中，prototype属性和__proto__属性有什么异同
+//prototype是函数上的，__proto__是实例上。但是它们指向同一个内容地址
+
+//什么叫原型链。
+//其实就是总结一下实例上方法运行时的查找的过程
+
+//JS中的继承是怎么实现的
+
+Person.prototype;
+Person.__proto__;
+Person//Funtion
+Person.__proto__==Function.prototype;//true IE
+
+FE.prototype=new Person;
+FE.prototype.__proto__=Person.prototype;//请思考：这样方式的继承行不行
+
+FE.prototype=Person.prototype;//思考这种方式的继承行不行
+FE.prototype.writeCSS=function(){}
+</script>

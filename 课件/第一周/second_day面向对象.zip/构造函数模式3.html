@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+//解决实例识别的构造函数模式
+//工厂模式的方法，生产出来的“东西”都是object类型的，是个拢统的数据类型。
+//不便于数据的差异化
+function shirtFactory(material){
+	var obj=new Object;
+	obj.material=material;
+	obj.weight="";
+	obj.height="";
+	obj.width="";
+	obj.size="";
+	return obj;
+}
+
+function Shirt(material){//构造函数
+	this.material=material;
+	this.weight="";
+	this.height="";
+	this.size="";
+	this.width="";
+	this.holdWarm=function(){console.log("保暖");};
+}
+var shirt1=new Shirt("虎皮");//用new关键字去执行一个函数，
+//则这个函数就被当成一类来使用，这个函数叫构造函数
+/*Shirt();
+//表格排序、创建一个实例，这个实例属性Shirt类型
+//再以这个实例为上下文（content）,运行Shirt这个函数（这会Shirt变成一个函数）
+new Shirt();
+//构造函数的作用是初始化
+shirt1.holdWarm();
+//实例识别的作用*/
+var shirt2=new Shirt("");
+alert(shirt1.holdWarm==shirt2.holdWarm);
+//方法函数复用
+
+</script>

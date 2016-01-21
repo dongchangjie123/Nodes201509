@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+function Shirt(material){//构造函数
+	this.material=material;
+	this.weight="";
+	this.height="";
+	this.size="";
+	this.width="";
+	var n=9;
+	n*99
+	//this.holdWarm=function(){console.log("保暖");};
+}
+var shirt1=new Shirt();
+//表格排序、创建Shirt类的实例
+//2、把实例返回
+//3、以此实例为上下文运行Shirt函数
+Shirt.prototype//任何一个函数都有此属性，但它的只有函数当成类来用的时候才意思
+//把所以有共享的方法都保存在此属性上。这个属性明显是一个对象类型的
+Shirt.prototype.holdWarm=function(){console.log("保暖");}
+Shirt.prototype.a=[1,2,3];
+
+
+var shirt2=new Shirt();
+alert(shirt1.holdWarm==shirt2.holdWarm);
+//原型模式解决的是类上的方法共享问题的
+//理解原型链。是JS中实现继承的基本机制
+shirt2.toString();//
+shirt2.fn1=function(){
+	console.log("fn1");
+	}
+shirt1.fn1;
+shirt1.a[0]=99;//先要查找，私有属性没有a属性，则找到原型上的a属性，所以就改变了这个属性的值
+//上面这一步的写，比下边的shirt1.a=null的写，多一步查找的过程
+alert(shirt2.a[0]);
+
+shirt1.a=null;//直接写，不存在查找原型的这个过程，所以就直接写到了私有属性上了.相当于在私有地址上定义了一个a属性。
+//shirt1.a[2]="abcd";//如果它有了一个私有的属性a，则不再去原型上查找了
+//读的时候有一个查找的过程，但写的时候没有
+alert(shirt2.a);
+//类上实例的属性，如果是读或有读的过程，则是先查找私有的属性没有没，如果没有，则再去prototype去找。
+//如果是写，则直接写在这个实例的私有地址上。
+</script>

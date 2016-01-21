@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+function Person(name){
+	this.weight=7;
+	this.height=40;
+	this.skin="yellow";
+	this.gender="";
+	this.name=name;
+	this.age=0;
+}
+Person.prototype.eat=function(){console.log("天生就会吃");}
+Person.prototype.cry=function(){console.log("天生就会哭");}
+function FE(name,age,degree){
+	//借用构造函数继承
+	//Person(name);
+	//当前FE这个函数的this是FE的实例
+	Person.call(this,name);
+	//call,aplly,这两个方法是定义在Function.prototype上的
+	
+	this.age=age;
+	this.degree=degree;	
+}
+
+FE.prototype=new Person;
+FE.prototype.writeCss=function(){
+	console.log("我已经掌握了写CSS的技术");
+	};
+FE.prototype.writeJS=function(){
+	console.log("我已经掌握了写JavaScript技术");
+	}
+
+var tom=new FE;
+tom.eat();
+
+</script>

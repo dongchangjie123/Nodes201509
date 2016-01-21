@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡图片切换</title>
+    <style type="text/css">
+        html, div, ul, li {
+            margin: 0;
+            padding: 0;
+            font: 14px/1.5 Arial;
+            color: #333;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        #tab {
+            position: relative;
+            width: 100%;
+            height: 504px;
+
+        }
+
+        .smg{
+            position:absolute;
+            width:1000px;
+            height:60px;
+            left:50%;
+            margin-left:-500px;
+            background:rgba(0,0,0,0.5);
+            z-index:99;
+            bottom:30px;
+
+        }
+        .smg ul{
+            width:100%;
+            height:100%;
+            padding-top:5px;
+            margin:0 26%;
+        }
+        .smg ul li{
+            float:left;
+            width:90px;
+            height:50px;
+            overflow:hidden;
+            margin-right:5px;
+        }
+        .bmg div{
+            display:none;
+        }
+        .bmg .select{
+            display:block;
+        }
+    </style>
+
+</head>
+<body>
+<div id="tab">
+    <div class="smg">
+        <ul>
+            <li class="select"><img src="images/smimg1.jpg"></li>
+            <li><img src="images/smimg2.jpg"></li>
+            <li><img src="images/smimg3.jpg"></li>
+            <li><img src="images/smimg4.jpg"></li>
+            <li><img src="images/smimg5.jpg"></li>
+        </ul>
+    </div>
+
+    <div class="bmg">
+        <div class="select"><img src="images/bgimg1.jpg"></div>
+        <div><img src="images/bgimg2.jpg"></div>
+        <div><img src="images/bgimg3.jpg"></div>
+        <div><img src="images/bgimg4.jpg"></div>
+        <div><img src="images/bgimg5.jpg"></div>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+    var oS = document.getElementsByClassName("smg");
+    var oLis = oS.getElementsByTagName("li");
+    var oB = document.getElementsByClassName("bmg");
+    var oDivs = oB.getElementsByTagName("div");
+
+    /*function changeTab(nIndex){
+     for(var i=0; i<oLis.length; i++){
+     oLis[i].className=null;
+     oDivs[i].className=null;
+     }
+
+     oLis[nIndex].className="select";
+     oDivs[nIndex].className="select";
+     }
+     for(var i=0;i<oLis.length;i++){
+     oLis[i].zhufeng=i;
+     oLis[i].onclick=function(){
+     changeTab(this.zhufeng);
+     }
+     }*/
+    for (var i = 0; i < oLis.length; i++) {
+        var oLi = oLis[i];//获取每一个li对象并存给一个变量，这个变量代表每一个li；
+        oLi.zhufeng = i;//自定义属性把每一个索引都存到一个自定义属性里
+        oLi.onmouseover = function () {//匿名函数，点击每一个li对象
+            for (var j = 0; j < oLis.length; j++) {
+                oLis[j].className = null;//把循环体内的所有li的className清空
+                oDivs[j].className = null;//把循环体内的所有div的className清空
+            }
+            this.className = "select";//每一个点击的li对象增加样式
+            oDivs[this.zhufeng].className = "select";//通过自定义属性保存的当前的索引值，给每一个点击的li对应的div增加样式
+
+        }
+    }
+</script>
+</body>
+</html>

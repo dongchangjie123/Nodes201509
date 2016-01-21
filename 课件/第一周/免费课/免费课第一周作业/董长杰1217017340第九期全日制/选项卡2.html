@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .header {
+            width: 100%;
+            margin: 0 auto;
+            height: 505px;
+            position: relative;
+        }
+
+        .bigImg {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: center top no-repeat;
+        }
+
+        .nav {
+            width: 1000px;
+            height: 64px;
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            left: 50%;
+            margin-left: -500px;
+            bottom: 30px;
+        }
+
+        .nav ul {
+            position: absolute;
+            top: 7px;
+            padding: 0 20%;
+        }
+
+        .nav ul li {
+            width: 85px;
+            height: 50px;
+            float: left;
+            margin-right: 5px;
+            background: #000;
+            opacity: .6;
+            overflow: hidden;
+        }
+
+        .nav ul li.action {
+            width: 79px;
+            height: 44px;
+            border: 3px solid darkorange;
+            opacity: 1;
+            overflow: hidden;
+
+        }
+
+        .nav ul li.active img {
+            margin: -3px 0 0 -3px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="bigImg" style="background: url('img/tx12.jpg')"; id="bImg">
+    </div>
+    <div class="nav" id="list">
+        <ul>
+            <li class="action"><img src="img/tx1.jpg"></li>
+            <li><img src="img/tx2.jpg"></li>
+            <li><img src="img/tx3.jpg"></li>
+            <li><img src="img/tx4.jpg"></li>
+            <li><img src="img/tx7.jpg"></li>
+        </ul>
+    </div>
+</div>
+<script>
+    var oImg = document.getElementById('bImg');
+    var oList = document.getElementById('list');
+    var oLis = oList.getElementsByTagName('li');
+
+    var arr = ['img/tx12.jpg', 'img/tx22.jpg', 'img/tx32.jpg', 'img/tx42.jpg', 'img/tx52.jpg'];
+
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].index = i;
+        oLis[i].onmouseover = function () {
+            tab(this.index);
+        }
+    }
+
+    function tab(oIndex) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = "";
+        }
+        //alert(2345)
+        oLis[oIndex].className = "action";
+        oImg.style.background = 'url(' + arr[oIndex] + ')';//切换背景
+    }
+</script>
+</body>
+</html>

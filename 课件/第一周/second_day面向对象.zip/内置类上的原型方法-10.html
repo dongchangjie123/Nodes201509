@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+内置类上的原型方法
+</body>
+</html>
+<script>
+var a=[1,2,3,4];
+alert(a);"1,2,3,4";
+//原型上的方法，一般都使用this来操作当前实例
+Array.prototype.toString=function(){
+	this//这里的this是指当前执行这个toString方法的实例
+	return this.join("++");
+	}
+alert(a);
+console.log(a);//把a的结构输出在控制台里
+//给你一个数组，共m项，从这m项中，随机取出n项来，n<m;
+/*var m=100;
+var n=20;
+function random(min,max){
+	return Math.floor(Math.random()*(max-min)+min)
+}
+var a=[];
+for(var i=0;i<100;i++){
+	a.push(i);
+}
+a
+var result=[];
+for(var j=0;j<20;j++){
+ var i=random(0,a.length);
+ result.push(i);
+ a.splice(i,表格排序);
+}*/
+Array.prototype.random=function(n){
+	//在当前执行这个random方法的实例中随机去掉n个数据，并且被随机去掉的这些值保存在一个数据里返回	
+	var result=[];
+	for(var j=0;j<n;j++){
+		//下面的代码是：取一个大于等于0,小于this.length的一个随机数
+		var random=Math.floor(Math.random()*(this.length));
+		var val=this[random];
+		this[random]=this[this.length-1];//让最后一项覆盖被随机取走的这一项。
+		this.length=this.length-1;//再把数组用这样的技巧减少一项。数组的length属性是可读写的。
+		result.push(val);
+	}
+	return result;
+}
+var a=[77,99,0,35,67,97,1,8,3,5,9,11,12,23,34,45,56,17,78];
+
+var a2=a.random(7);
+ 
+ a.slice;
+ //你根据slice的功能，自已来实现一个方法
+</script>

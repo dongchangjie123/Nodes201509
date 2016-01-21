@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .header_bar {
+            width: 100%;
+            margin: 0 auto;
+            height: 504px;
+            position: relative;
+        }
+
+        .header_img {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: center top no-repeat;
+        }
+
+        .img_info {
+            width: 1000px;
+            height: 64px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            left: 50%;
+            margin-left: -500px;
+            bottom: 30px;
+        }
+
+        .img_info ul {
+            position: absolute;
+            top: 7px;
+            padding: 0 20%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .img_info ul li {
+            width: 85px;
+            height: 50px;
+            float: left;
+            margin-right: 5px;
+            background: #000;
+            opacity: .6;
+            overflow: hidden;
+        }
+
+        .img_info ul li.active {
+            width: 79px;
+            height: 44px;
+            border: 3px solid darkorange;
+            opacity: 1;
+            overflow: hidden;
+
+        }
+
+        .img_info ul li.active img {
+            margin: -3px 0 0 -3px;
+        }
+    </style>
+</head>
+<body>
+<div class="header_bar">
+    <div class="header_img" style="background: url('img/dt1.jpg') ;" id="bImg">
+
+    </div>
+    <div class="img_info" id="list">
+        <ul>
+            <li class="active"><img src="img/xt1.jpg"></li>
+            <li><img src="img/xt2.jpg"></li>
+            <li><img src="img/xt3.jpg"></li>
+            <li><img src="img/xt4.jpg"></li>
+            <li><img src="img/xt5.jpg"></li>
+        </ul>
+    </div>
+</div>
+<script>
+    var oImg = document.getElementById('bImg');
+    var oList = document.getElementById('list');
+    var oLis = oList.getElementsByTagName('li');
+
+    var arr = ['img/dt1.jpg', 'img/dt2.jpg', 'img/dt3.jpg', 'img/dt4.jpg', 'img/dt5.jpg'];
+
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].index = i;
+        oLis[i].onmouseover = function () {
+            tab(this.index);
+        }
+    }
+
+    function tab(oIndex) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = "";
+            oImg.style.background = 'url(' + +')';
+        }
+        oLis[oIndex].className = "active";
+        oImg.style.background = 'url(' + arr[oIndex] + ')';
+    }
+</script>
+</body>
+</html>

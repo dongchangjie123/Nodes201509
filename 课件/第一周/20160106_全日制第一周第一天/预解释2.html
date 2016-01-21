@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset=>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    预解释
+    1、JS中的内存空间分为两种：栈内存、堆内存
+    栈内存：提供JS代码执行的环境;存储基本数据类型的值; ->全局作用域或者私有的作用域其实都是栈内存
+    堆内存：存储引用数据类型的值(对象是把属性名和属性值存储进去,函数是把函数体中的代码当做字符串存储进去)
+    2、当浏览器加载我们HTML页面的时候,首先会提供一个供JS代码执行的环境->全局作用域(global->window)
+    3、在JS代码执行之前,浏览器还需要自己做一些事情:把所有带var/function关键字的进行提前的声明或者定义 ->"预解释"(变量提声)
+    声明(declare) -> 告诉浏览器我有这样一个东西啦,例如 var num1; function fn;
+    定义(defined) -> 给我们声明的变量或者函数赋值,例如 num1=12; fn=function(){}
+            [重要]变量只声明没有定义,默认的值是undefined(未定义)
+    4、var和function在预解释阶段处理是不一样的
+    var -> 在预解释的时候只是提前的声明了这个变量,只有当代码执行的时候才会完成赋值操作
+    function -> 在预解释的时候会提前的把声明加定义都完成了(在代码执行的时候遇到定义的代码直接的跳过)
+            [重要]刚开始只对window下的进行预解释,fn函数中目前存储的都是字符串,所以var total没啥实际的意义,所以不进行预解释 -> "预解释是发生在当前作用域下的"
+    console.log(obj);//->undefined
+    var obj = {name: "王文沙", age: 18};
+    function fn(num1, num2) {//代码执行到这一行的时候直接的跳过,因为在预解释的时候我们已经完成了声明加定义
+        var total = num1 + num2;
+        console.log(total);
+    }
+    var num1 = 12;
+    fn(num1, 100);//执行fn，把全局变量num1的值赋值给形参num1，
+    // 把100赋值给形参num2
+//    5、在全局作用域下声明的变量是全局变量
+//    在私有作用域中声明的变量是私有变量;函数的形参也是私有的变量;
+//    如何分辨函数中出现的变量是私有的还是全局的?
+//            作用域链：
+//    首先看是否为形参，然后看是否在私有作用域中声明过(有没有var过)，
+//    两者有其一就是私有的变量,那么在当前函数中不管什么位置出现都是私有的,
+// 和全局没有关系;
+//    如果两者都没有，说明不是私有的，则往其上一级作用域进行查找...，一直找到window为止；
+//    6、函数执行的时候会形成一个新的私有的作用域(栈内存),
+// 供函数体中的代码执行;
+//    表格排序)给形参赋值
+//    2)私有作用域下的预解释
+//    3)私有作用域下的代码执行
+//    形成的新的私有的作用域还保护了里面的私有变量不受外界的影响,
+// 我们把函数的这种保护机制->"闭包"
+//    7、在全局作用域中，带var和不带var的关系
+//    区别：带var的可以进行预解释，所以在赋值的前面执行不会报错；
+//    不带var的是不能进行预解释的，在前面执行会报错；
+//    关系：
+//    num=12；相当于给window增加一个属性名，属性值是12
+//    var num=12；相当于给全局作用域增加了一个全局变量num，
+// 也相当于给window增加一个属性名
+
+//    例子 ：
+//    表格排序、console.log(total); ->undefined
+//    var total = 0;
+//    function fn() {
+//        console.log(total); ->undefined
+//        total += 100;
+//        var total=200;
+//        console.log(total); ->200
+//    }
+//    fn();
+//    console.log(total); ->0 全局作用域下的
+//    console.log(total); ->undefined
+//
+//    2、 var total = 0;
+//    function fn() {
+//        console.log(total); ->0
+//        total += 100;
+//        total = 200;
+//        console.log(total); ->200
+//    }
+//    fn();
+//    console.log(total); ->200
+//
+//    3、 var a;
+//    window.b = 0;
+//    window.fn = function () {
+//        //var a = b = 2;
+//        var a = 2;//a是私有的和全局没关系
+//        b = 2;//b是全局的
+//    };
+//    fn();//window.fn()
+//    console.log(a, b);//undefined 2
+//    如果一个私有作用域中出现的变量不是私有的,
+//            那么会往其上级作用域查找,上级没有则继续查找,
+//            一直找到window为止,如果window也没有呢?
+//            获取值:会报错，不进行特殊处理的时候，
+//    下边的代码不在执行；
+//    function fn() {
+//        console.log(num);// Uncaught ReferenceError: num is not defined
+//    }
+//    fn();
+//    设置值:不是私有的,找全局,全局没有的话相当于给全局加一个
+//    function fn() {
+//        num = 13;//相当于给window增加了一个叫做num的属性名,属性值是13 window.num=13;
+//    }
+//    fn();
+//    console.log(num);//13
+//    in:检测某一个属性名是否属于这个对象
+//    (不管是私有的属性还是公有的属性,只要是当前对象的属性返回true,
+//            不是的话返回false)
+//    var obj = {name: "王小波", age: 30};
+//    console.log("name" in obj);//->true
+//    console.log("height" in obj);//->false
+////    表格排序、不管条件是否成立都要进行预解释
+////    window预解释:var a; -> window.a;
+////    if (!("a" in window)) {//"a" in window -> true
+////        var a = "珠峰培训";
+////    }
+////    console.log(a);//->undefined
+//    2、预解释只发生在"="的左边,只把左边的进行预解释,
+//            右边的是值是不进行预解释的
+//    匿名函数之函数表达式:把函数定义的部分当做值赋值给一个变量
+//    或者元素的事件
+//    预解释的时候:var fn; ->fn的默认值是undefined
+//    fn();//->undefined() Uncaught TypeError: fn is not a function
+//    JS中只有函数可以执行 && JS上面的代码如果报错了,
+//            在不进行任何的特殊处理情况下我们下面的代码都不在执行了
+//    var fn = function () {
+//        console.log("ok");
+//    };
+//    fn();
+//    预解释的时候:fn=xxxfff000
+//    fn();//->"ok"
+//    function fn() {
+//        console.log("ok");
+//    }
+//    fn();//->"ok"
+//    3、函数体中return下面的代码虽然不在执行了,但是下面的代码需要参加预解释；
+//    而return后面的东西是需要处理的，但是由于它是当做一个值返回的，所以不进行预解释；
+//    var total = 300;
+//    function fn() {
+//        console.log(total);
+//        return function sum() {};//return是把函数中的值返回到函数的外面,
+//        这里是把function对应的内存地址返回的到函数的外面,例如:return xxxfff111;
+//        函数体中return下面的代码都不在执行了
+//        var total = 10;
+//    }
+//    fn();
+//    4、匿名函数的function在全局作用域下是不进行预解释的
+//    匿名函数之自执行函数:定义和执行一起完成了
+//    (function(num){})(100);
+//    5、在预解释的时候,如果遇到名字重复了,只声明一次,
+//            不重复的声明,但是要重新的赋值
+//    在JS中变量的名字和函数的名字如果一样是算作重复的
+//    预解释:
+////            var fn; 声明
+////    fn = xxxfff000; [声明]不要了+定义
+////    fn = xxxfff111; [声明]不要了+定义
+////    ->fn=xxxfff111
+////    var fn = 12;//window.fn=12
+////    function fn() { //window.fn=function(){}
+////    }
+////    function fn() {
+////    }
+//    window下的预解释:
+//            fn=xxxfff111; 声明+定义
+//    var fn; 声明 (这一步不需要处理,不需要重新声明)
+//    fn=xxxfff222; 声明（不重复进行）+定义(只需要执行定义即可)
+//    ->fn=xxxfff222
+//    fn();// ->2
+//    function fn() {
+//        console.log(表格排序);
+//    }
+//    fn(); // ->2
+//    var fn = 13;//var fn;跳过 fn=13(在预解释的时候没有执行这句话赋值的操作)
+//    fn();//->13() Error:fn is not a function
+//    function fn() {
+//        console.log(2);/*上边报错，下边不在执行*/
+//    }
+//    fn();
+//    JS中作用域只有两种：window全局作用域、函数执行形成的私有作用域
+//    {name:""} if(){} for(){} while(){} switch(){} 这些都不会产生作用域
+//
+//    如何查找当前作用域的上级作用域?
+//            当前作用域的上级作用域是谁和函数在哪执行的没有任何的关系,我们只需要看当前函数是在哪个作用域下定义的,那么它的上级作用域就是谁
+
+</script>
+</body>
+</html>

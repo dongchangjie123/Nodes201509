@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .header_bar {
+            width: 100%;
+            margin: 0px auto;
+            height: 504px;
+            position: relative;
+        }
+
+        .header_img {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+
+        .header_img li {
+            display: none;
+        }
+
+        .header_img li.active {
+            display: block;
+        }
+
+        .img_info {
+            width: 1000px;
+            height: 64px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            left: 50%;
+            margin-left: -500px;
+            bottom: 30px;
+        }
+
+        .img_info ul {
+            position: absolute;
+            top: 7px;
+            padding: 0 20%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .img_info ul li {
+            width: 85px;
+            height: 50px;
+            float: left;
+            margin-right: 5px;
+            background: #000;
+            opacity: .6;
+            overflow: hidden;
+        }
+
+        .img_info ul li.active {
+            width: 79px;
+            height: 44px;
+            border: 3px solid darkorange;
+            opacity: 1;
+            overflow: hidden;
+        }
+
+        .img_info ul li.active img {
+            margin: -3px 0 0 -3px;
+        }
+    </style>
+</head>
+<body>
+<div class="header_bar">
+    <ul class="header_img" id="bImg">
+        <li class="active"><img src="img/dt1.jpg"></li>
+        <li><img src="img/dt2.jpg"></li>
+        <li><img src="img/dt3.jpg"></li>
+        <li><img src="img/dt4.jpg"></li>
+        <li><img src="img/dt5.jpg"></li>
+    </ul>
+    <div class="img_info" id="list">
+        <ul>
+            <li class="active"><img src="img/xt1.jpg"></li>
+            <li><img src="img/xt2.jpg"></li>
+            <li><img src="img/xt3.jpg"></li>
+            <li><img src="img/xt4.jpg"></li>
+            <li><img src="img/xt5.jpg"></li>
+        </ul>
+    </div>
+</div>
+<script>
+    var oImg = document.getElementById('bImg');
+    var oBimg = oImg.getElementsByTagName('li');
+    var oList = document.getElementById('list');
+    var oLis = oList.getElementsByTagName('li');
+
+
+
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].onmouseover = (function (i) {
+            return function () {
+                tab(i);
+            }
+        })(i);
+    }
+
+    /*for (var i = 0; i < oLis.length; i++) {
+     ~function (i) {
+     oLis[i].onmouseover = function () {
+     tab(i);
+     }
+     }(i)
+
+     }*/
+
+    function tab(index) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = "";
+            oBimg[i].className = "";
+        }
+        oLis[index].className = "active";
+        oBimg[index].className = "active";
+    }
+</script>
+</body>
+</html>

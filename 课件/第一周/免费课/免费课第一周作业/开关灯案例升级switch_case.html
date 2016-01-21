@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>开关灯</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+<div id="div1" style="background-color:white"></div>
+<script>
+    var oWidth = window.screen.width,
+            oHeight = window.screen.height,
+            oDiv = document.getElementById('div1');
+    oDiv.style.width = oWidth + "px";
+    oDiv.style.height = oHeight + "px";
+
+    oDiv.onclick = function () {
+        var oColor = oDiv.style.backgroundColor;
+        switch (oDiv.style.backgroundColor) {
+
+            case "white":
+                oDiv.style.backgroundColor = "red";
+                break;
+            case "red":
+                oDiv.style.backgroundColor = "yellow";
+                break;
+            case "yellow":
+                oDiv.style.backgroundColor = "green";
+                break;
+            case "green":
+                oDiv.style.backgroundColor = "blue";
+                break;
+            case "blue":
+                oDiv.style.backgroundColor = "black";
+                break;
+            default :
+                oDiv.style.backgroundColor = "white";
+        }
+    }
+
+</script>
+</body>
+</html>

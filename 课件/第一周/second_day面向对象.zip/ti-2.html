@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+var number = 2;
+	var obj = {
+		number : 4,
+		fn1 : ( function() {		 
+			this.number *= 2; //4
+			number=number*2;
+			var number=3;
+			return function() {
+				this.number *= 2;
+				number*=3; //9
+				alert(number);
+			}
+		} )()
+		
+	};	
+	var fn1 = obj.fn1;
+	alert(number); 
+	fn1();
+	obj.fn1();
+	alert(number); 
+	alert(obj.number); 
+</script>

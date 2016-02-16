@@ -45,7 +45,7 @@
         var imgFir = document.getElementById("img1");
         var trueImg = imgFir.getAttribute("trueImg");
         //imgFir.src = trueImg; ->直接这样写不好,如果真实图片的地址不存在的话,当我们设置src后,页面中显示的是一张碎图,这样的话还不如显示默认图呢
-        var oImg = new Image;//->createElement("img")创建一个新的img标签
+        var oImg = new Image;//->createElement("img1")创建一个新的img标签
         oImg.src = trueImg;
         oImg.onload = function () {//->当前的真实图片可以加载成功
             imgFir.src = this.src;

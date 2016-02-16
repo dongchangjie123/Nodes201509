@@ -55,7 +55,7 @@
         var trueImg = imgOne.getAttribute("trueImg");
 
         //验证图片是否正常加载
-        var oImg = new Image;//->document.createElement("img") 创建一个image标签
+        var oImg = new Image;//->document.createElement("img1") 创建一个image标签
         oImg.src = trueImg;//->把真实的地址先赋值给我们新创建的标签,此时这个标签还为加载到页面中,错误也好正确也好在页面都看不见
         oImg.onload = function () {
             //如果图片能够正常的加载就会执行onload事件,我在这里把真实的地址赋值给我们的页面中的img标签

@@ -1,10 +1,10 @@
 (function () {
     //->数据源
-    var ary = ["img/banner1.jpg", "img/banner2.jpg", "img/banner3.jpg", "img/banner4.jpg"];
+    var ary = ["img1/banner1.jpg", "img1/banner2.jpg", "img1/banner3.jpg", "img1/banner4.jpg"];
 
     //->定义几个初始的变量
     var autoTimer = null, step = 0, count = ary.length;
-    var inner = document.getElementById("inner"), imgList = inner.getElementsByTagName("img");
+    var inner = document.getElementById("inner"), imgList = inner.getElementsByTagName("img1");
     var tip = document.getElementById("tip"), tipList = tip.getElementsByTagName("li");
 
     //->数据绑定
@@ -13,9 +13,9 @@
         //->图片
         var str = "";
         for (var i = 0; i < ary.length; i++) {
-            str += "<div><img src='' trueImg='" + ary[i] + "'/></div>";
+            str += "<div><img1 src='' trueImg='" + ary[i] + "'/></div>";
         }
-        str += "<div><img src='' trueImg='" + ary[0] + "'/></div>";
+        str += "<div><img1 src='' trueImg='" + ary[0] + "'/></div>";
         inner.innerHTML = str;
         inner.style.width = (count + 1) * 1000 + "px";
 
